@@ -23,7 +23,7 @@ class Directory extends Component {
           title: "muscle building",
           imageUrl: `${musclebuilding}`,
           id: 2,
-          linkUrl: "",
+          linkUrl: "musclebuilding",
         },
         {
           title: "cardio",

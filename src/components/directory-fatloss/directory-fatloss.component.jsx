@@ -20,7 +20,7 @@ class DirectoryFatLoss extends Component {
           id: 1,
           name: "Fight to be Fit",
           imageUrl: `${fatloss1}`,
-          price: 25,
+          price: 28,
         },
         {
           id: 2,
