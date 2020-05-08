@@ -9,10 +9,10 @@ const Header = () => (
       <img src={logo} alt="logo" style={{width:'130px', height:'100px', marginLeft:'80px'}}/>
     </Link>
     <div className='options'>
-      <Link className='option' to='/shop'>
-        SHOP
+      <Link className='option' to='/signin'>
+        SIGN IN
       </Link>
-      <Link className='option' to='/shop'>
+      <Link className='option' to='/'>
         CONTACT
       </Link>
     </div>
