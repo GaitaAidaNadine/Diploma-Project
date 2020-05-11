@@ -17,6 +17,16 @@
     &:hover {
       background-color:grey;
       color: black;
-      border: 1px solid black;
+    }
+
+    &.google-sign-in{
+      background-color: #B22222;
+      color: white;
+      margin-left: 10px;
+
+      &:hover{
+        background-color: #8B0000;
+        border: none;
+      }
     }
   }
