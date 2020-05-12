@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import CustomButton from "../custom-button/custom-button.component";
 import "./sign-up.styles.scss";
+import { auth, createUserProfileDocument } from "../../firebase/firebase.utils";
 
 class SignUp extends Component {
   constructor() {
@@ -14,15 +15,29 @@ class SignUp extends Component {
     };
   }
 
-  handleSubmit = (event) => {
+  handleSubmit = async event => {
     event.preventDefault();
+    const {displayName, email, password, confirmPassword} = this.state;
 
-    this.setState({
-      displayName: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
-    });
+    if(password !== confirmPassword){
+      alert("Password don't match!");
+      return;
+    }
+
+    try{
+      const {user} = await auth.createUserWithEmailAndPassword(email, password);
+      await createUserProfileDocument(user, {displayName})
+
+      //this will clear our form
+      this.setState({
+        displayName: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+      })
+    }catch(error){
+      console.error(error);
+    }
   };
 
   handleOnChangeName = (event) => {
