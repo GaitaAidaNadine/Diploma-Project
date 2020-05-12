@@ -25,8 +25,8 @@ class SignUp extends Component {
     }
 
     try{
-      const {user} = await auth.createUserWithEmailAndPassword(email, password);
-      await createUserProfileDocument(user, {displayName})
+      const { user } = await auth.createUserWithEmailAndPassword(email, password);
+      await createUserProfileDocument(user, { displayName })
 
       //this will clear our form
       this.setState({
