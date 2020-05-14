@@ -1,14 +1,15 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 import CollectionItem from "../collection-item/collection-item.component";
 import "./directory-fatloss.styles.scss";
-import fatloss1 from './../../assets/fatloss1.png'
-import fatloss2 from './../../assets/fatloss2.png'
-import fatloss3 from './../../assets/fatloss3.png'
-import fatloss4 from './../../assets/fatloss4.png'
-import fatloss5 from './../../assets/fatloss5.png'
-import fatloss6 from './../../assets/fatloss6.png'
-import fatloss7 from './../../assets/fatloss7.png'
-import fatloss8 from './../../assets/fatloss8.png'
+import fatloss1 from "./../../assets/fatloss1.png";
+import fatloss2 from "./../../assets/fatloss2.png";
+import fatloss3 from "./../../assets/fatloss3.png";
+import fatloss4 from "./../../assets/fatloss4.png";
+import fatloss5 from "./../../assets/fatloss5.png";
+import fatloss6 from "./../../assets/fatloss6.png";
+import fatloss7 from "./../../assets/fatloss7.png";
+import fatloss8 from "./../../assets/fatloss8.png";
 
 class DirectoryFatLoss extends Component {
   constructor() {
@@ -69,6 +70,7 @@ class DirectoryFatLoss extends Component {
   }
 
   render() {
+    const { match, history } = this.props;
     return (
       <div className="directory-fatloss-menu">
         {this.state.programs.map((program) => (
@@ -77,6 +79,9 @@ class DirectoryFatLoss extends Component {
             imageUrl={program.imageUrl}
             name={program.name}
             price={program.price}
+            id={program.id}
+            match={match}
+            history={history}
           />
         ))}
       </div>
@@ -84,4 +89,4 @@ class DirectoryFatLoss extends Component {
   }
 }
 
-export default DirectoryFatLoss;
+export default withRouter(DirectoryFatLoss);

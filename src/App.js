@@ -7,6 +7,7 @@ import MuscleBuildingPage from "./pages/musclebuildingpage/musclebuildingpage.co
 import SignInAndSignUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
 import Header from "./components/header/header.component";
 import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
+import ProductDetails from "./components/product-details/product-details.component";
 
 class App extends React.Component {
   constructor() {
@@ -51,14 +52,17 @@ class App extends React.Component {
     this.unsubscribeFromAuth();
   }
 
+  /*when the component path matches the current location in our app, that component will be rendered and 
+  a match object will be created as props in the component, for example in our Homepage component*/
   render() {
     return (
       <div>
         <Header currentUser={this.state.currentUser} />
         <Switch>
-          <Route exact path="/" component={HomePage} />
+          <Route exact path="/" component={HomePage} /> 
           <Route exact path="/fatloss" component={FatLossPage} />
-          <Route exact path="/musclebuilding" component={MuscleBuildingPage} />
+          <Route path="/fatloss/:productId" component={ProductDetails} />
+          <Route path="/musclebuilding" component={MuscleBuildingPage} />
           <Route path="/signin" component={SignInAndSignUpPage} />
         </Switch>
       </div>

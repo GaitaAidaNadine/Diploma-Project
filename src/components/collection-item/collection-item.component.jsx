@@ -1,7 +1,8 @@
 import React from "react";
+import { withRouter } from "react-router-dom";
 import "./collection-item.styles.scss";
 
-const CollectionItem = ({ id, name, price, imageUrl }) => {
+const CollectionItem = ({ id, name, price, imageUrl, match, history }) => {
   return (
     <div className="collection-item">
       <div
@@ -15,11 +16,16 @@ const CollectionItem = ({ id, name, price, imageUrl }) => {
         <span className="price">${price}</span>
       </div>
       <div className="button-group">
-        <button className="button-seeDetails">SEE DETAILS</button>
+        <button
+          className="button-seeDetails"
+          onClick={() => history.push(`${match.url}/${id}`)}
+        >
+          SEE DETAILS
+        </button>
         <button className="button-seeDetails-black">ADD TO CART</button>
       </div>
     </div>
   );
 };
 
-export default CollectionItem;
+export default withRouter(CollectionItem);
