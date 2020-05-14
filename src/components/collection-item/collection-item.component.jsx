@@ -14,6 +14,10 @@ const CollectionItem = ({ id, name, price, imageUrl }) => {
         <span className="name">{name}</span>
         <span className="price">${price}</span>
       </div>
+      <div className="button-group">
+        <button className="button-seeDetails">SEE DETAILS</button>
+        <button className="button-seeDetails-black">ADD TO CART</button>
+      </div>
     </div>
   );
 };
