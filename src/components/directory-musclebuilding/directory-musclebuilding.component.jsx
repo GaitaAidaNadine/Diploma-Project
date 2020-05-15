@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import CollectionItem from "../collection-item/collection-item.component";
+import { withRouter } from "react-router-dom";
 import "./directory-musclebuilding.styles.scss";
-import musclebuilding1 from './../../assets/musclebuilding1.png'
-import musclebuilding2 from './../../assets/musclebuilding2.png'
-import musclebuilding3 from './../../assets/musclebuilding3.png'
-import musclebuilding4 from './../../assets/musclebuilding4.png'
-import musclebuilding5 from './../../assets/musclebuilding5.png'
-import musclebuilding6 from './../../assets/musclebuilding6.png'
+import musclebuilding1 from "./../../assets/musclebuilding1.png";
+import musclebuilding2 from "./../../assets/musclebuilding2.png";
+import musclebuilding3 from "./../../assets/musclebuilding3.png";
+import musclebuilding4 from "./../../assets/musclebuilding4.png";
+import musclebuilding5 from "./../../assets/musclebuilding5.png";
+import musclebuilding6 from "./../../assets/musclebuilding6.png";
 
 class DirectoryMuscleBuilding extends Component {
   constructor() {
@@ -15,37 +16,37 @@ class DirectoryMuscleBuilding extends Component {
     this.state = {
       programs: [
         {
-          id: 1,
+          id: 9,
           name: "Warrior Workout",
           imageUrl: `${musclebuilding1}`,
           price: 45,
         },
         {
-          id: 2,
+          id: 10,
           name: "Drop 5 System",
           imageUrl: `${musclebuilding2}`,
           price: 50,
         },
         {
-          id: 3,
+          id: 11,
           name: "Off-Season Classic",
           imageUrl: `${musclebuilding3}`,
           price: 35,
         },
         {
-          id: 4,
+          id: 12,
           name: "Look Like a Pro",
           imageUrl: `${musclebuilding4}`,
           price: 25,
         },
         {
-          id: 5,
+          id: 13,
           name: "The Total Package",
           imageUrl: `${musclebuilding5}`,
           price: 32,
         },
         {
-          id: 6,
+          id: 14,
           name: "Military Athlete Workout",
           imageUrl: `${musclebuilding6}`,
           price: 14,
@@ -55,6 +56,7 @@ class DirectoryMuscleBuilding extends Component {
   }
 
   render() {
+    const { match, history } = this.props;
     return (
       <div className="directory-musclebuilding-menu">
         {this.state.programs.map((program) => (
@@ -63,6 +65,9 @@ class DirectoryMuscleBuilding extends Component {
             imageUrl={program.imageUrl}
             name={program.name}
             price={program.price}
+            id={program.id}
+            match={match}
+            history={history}
           />
         ))}
       </div>
@@ -70,4 +75,4 @@ class DirectoryMuscleBuilding extends Component {
   }
 }
 
-export default DirectoryMuscleBuilding;
+export default withRouter(DirectoryMuscleBuilding);

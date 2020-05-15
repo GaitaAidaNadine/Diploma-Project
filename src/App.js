@@ -4,10 +4,13 @@ import HomePage from "./pages/homepage/homepage.component";
 import "./App.css";
 import FatLossPage from "./pages/fatlosspage/fatlosspage.component";
 import MuscleBuildingPage from "./pages/musclebuildingpage/musclebuildingpage.component";
+import CardioPage from './pages/cardiopage/cardiopage.component';
+import YogaPage from "./pages/yogapage/yogapage.component";
 import SignInAndSignUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
 import Header from "./components/header/header.component";
 import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 import ProductDetails from "./components/product-details/product-details.component";
+import PilatesPage from "./pages/pilatespage/pilatespage.component";
 
 class App extends React.Component {
   constructor() {
@@ -62,7 +65,14 @@ class App extends React.Component {
           <Route exact path="/" component={HomePage} /> 
           <Route exact path="/fatloss" component={FatLossPage} />
           <Route path="/fatloss/:productId" component={ProductDetails} />
-          <Route path="/musclebuilding" component={MuscleBuildingPage} />
+          <Route exact path="/musclebuilding" component={MuscleBuildingPage} />
+          <Route path="/musclebuilding/:productId" component={ProductDetails} />
+          <Route exact path='/cardio' component={CardioPage} />
+          <Route path="/cardio/:productId" component={ProductDetails} />
+          <Route exact path='/yoga' component={YogaPage} />
+          <Route path="/yoga/:productId" component={ProductDetails} />
+          <Route exact path='/pilates' component={PilatesPage} />
+          <Route path="/pilates/:productId" component={ProductDetails} />
           <Route path="/signin" component={SignInAndSignUpPage} />
         </Switch>
       </div>
