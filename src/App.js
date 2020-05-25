@@ -1,28 +1,24 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
+import { connect } from "react-redux";
 import HomePage from "./pages/homepage/homepage.component";
 import "./App.css";
 import FatLossPage from "./pages/fatlosspage/fatlosspage.component";
 import MuscleBuildingPage from "./pages/musclebuildingpage/musclebuildingpage.component";
-import CardioPage from './pages/cardiopage/cardiopage.component';
+import CardioPage from "./pages/cardiopage/cardiopage.component";
 import YogaPage from "./pages/yogapage/yogapage.component";
 import SignInAndSignUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
 import Header from "./components/header/header.component";
 import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
+import { setCurrentUser } from "./redux/user/user-actions";
 import ProductDetails from "./components/product-details/product-details.component";
 import PilatesPage from "./pages/pilatespage/pilatespage.component";
 
 class App extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      currentUser: null,
-    };
-  }
-
   unsubscribeFromAuth = null;
 
   componentDidMount() {
+    const { setCurrentUser } = this.props;
     //onAuthStateChanged-> method with open subscription(everytime the user signs-in or signs-out we receive that user's state without requesting it all the time)
     //it is async because we'll make a potential api request to our firestore
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
@@ -33,19 +29,15 @@ class App extends React.Component {
         //used this to STORE IN OUR STATE the USER DATA that logged-in from DB
         //onSnapshot -> listen to userRef to any changes to that data
         (await userRef).onSnapshot((snapshot) => {
-          this.setState({
-            currentUser: {
-              id: snapshot.id,
-              ...snapshot.data(),
-            },
+          setCurrentUser({
+            id: snapshot.id,
+            ...snapshot.data(),
           });
-
-          console.log(this.state);
         });
       }
-      //user signs-out 
+      //user signs-out
       else {
-        this.setState({ currentUser: userAuth });
+        setCurrentUser(userAuth);
       }
     });
   }
@@ -60,18 +52,18 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Header currentUser={this.state.currentUser} />
+        <Header />
         <Switch>
-          <Route exact path="/" component={HomePage} /> 
+          <Route exact path="/" component={HomePage} />
           <Route exact path="/fatloss" component={FatLossPage} />
           <Route path="/fatloss/:productId" component={ProductDetails} />
           <Route exact path="/musclebuilding" component={MuscleBuildingPage} />
           <Route path="/musclebuilding/:productId" component={ProductDetails} />
-          <Route exact path='/cardio' component={CardioPage} />
+          <Route exact path="/cardio" component={CardioPage} />
           <Route path="/cardio/:productId" component={ProductDetails} />
-          <Route exact path='/yoga' component={YogaPage} />
+          <Route exact path="/yoga" component={YogaPage} />
           <Route path="/yoga/:productId" component={ProductDetails} />
-          <Route exact path='/pilates' component={PilatesPage} />
+          <Route exact path="/pilates" component={PilatesPage} />
           <Route path="/pilates/:productId" component={ProductDetails} />
           <Route path="/signin" component={SignInAndSignUpPage} />
         </Switch>
@@ -80,4 +72,8 @@ class App extends React.Component {
   }
 }
 
-export default App;
+const mapDispatchToProps = (dispatch) => ({
+  setCurrentUser: (user) => dispatch(setCurrentUser(user)),
+});
+
+export default connect(null, mapDispatchToProps)(App);
