@@ -3,11 +3,13 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
 import { auth } from "../../firebase/firebase.utils";
+import CartIcon from "./../cart-icon/cart-icon.component";
 import logo from "../../assets/logo-mic3.png";
 
 import "./header.styles.scss";
+import CartDropdown from "../cart-dropdown/cart-dropdown.component";
 
-const Header = ({ currentUser }) => (
+const Header = ({ currentUser, hidden }) => (
   <div className="header">
     <Link to="/">
       <img
@@ -29,7 +31,9 @@ const Header = ({ currentUser }) => (
       <Link className="option" to="/">
         CONTACT
       </Link>
+      <CartIcon />
     </div>
+    {hidden ? null : <CartDropdown />}
   </div>
 );
 
@@ -37,6 +41,7 @@ const Header = ({ currentUser }) => (
 const mapStateToProps = (state) => {
   return {
     currentUser: state.user.currentUser,
+    hidden: state.cart.hidden,
   };
 };
 
