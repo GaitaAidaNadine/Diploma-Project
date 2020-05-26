@@ -55,12 +55,9 @@ class DirectoryCardio extends Component {
         {this.state.programs.map((program) => (
           <CollectionItem
             key={program.id}
-            imageUrl={program.imageUrl}
-            name={program.name}
-            price={program.price}
-            id={program.id}
             match={match}
             history={history}
+            program={program}
           />
         ))}
       </div>

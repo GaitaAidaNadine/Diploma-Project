@@ -1,8 +1,11 @@
 import React from "react";
+import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
+import { addItem } from "./../../redux/cart/cart-actions";
 import "./collection-item.styles.scss";
 
-const CollectionItem = ({ id, name, price, imageUrl, match, history }) => {
+const CollectionItem = ({ match, history, addItem, program }) => {
+  const { id, name, price, imageUrl } = program;
   return (
     <div className="collection-item">
       <div
@@ -22,10 +25,14 @@ const CollectionItem = ({ id, name, price, imageUrl, match, history }) => {
         >
           SEE DETAILS
         </button>
-        <button className="button-seeDetails-black">ADD TO CART</button>
+        <button className="button-seeDetails-black" onClick={() => addItem(program)}>ADD TO CART</button>
       </div>
     </div>
   );
 };
 
-export default withRouter(CollectionItem);
+const mapDispatchToProps = (dispatch) => ({
+  addItem: (item) => dispatch(addItem(item)),
+});
+
+export default connect(null, mapDispatchToProps)(withRouter(CollectionItem));
