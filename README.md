@@ -1,3 +1,10 @@
+## FitAddict - E-commerce application
+FitAddict is a full stack E-commerce application that has included all the functionalities you would expect in a production application including Google Sign In, a shopping cart and full intergration of the Stripe API for handling payments. This is an E-commerce application for buying different workouts depending on your goal and preferences (lose fat, building muscle, cardio, yoga and pilates).
+Each workout has its own page where we can find a short description and a trailer(video) of it.
+
+## Technologies
+React.js, React Router, Redux, SASS, Node.js, REST API, Firebase, Stripe API
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
