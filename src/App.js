@@ -13,6 +13,7 @@ import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 import { setCurrentUser } from "./redux/user/user-actions";
 import ProductDetails from "./components/product-details/product-details.component";
 import PilatesPage from "./pages/pilatespage/pilatespage.component";
+import CheckoutPage from "./pages/checkoutpage/checkoutpage.component";
 
 class App extends React.Component {
   unsubscribeFromAuth = null;
@@ -66,6 +67,7 @@ class App extends React.Component {
           <Route exact path="/pilates" component={PilatesPage} />
           <Route path="/pilates/:productId" component={ProductDetails} />
           <Route exact path="/signin" render={() => this.props.currentUser ? <Redirect to='/' /> : <SignInAndSignUpPage/>} />
+          <Route exact path="/checkout" component={CheckoutPage} />
         </Switch>
       </div>
     );
