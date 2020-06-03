@@ -1,10 +1,20 @@
-//actual code that combines all of our states together
 import { combineReducers } from "redux";
-
-import userReducer from "./user/user-reducer";
+import { persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage"; // similar to window.localStorage object
 import cartReducer from "./cart/cart-reducer";
+import userReducer from "./user/user-reducer";
 
-export default combineReducers({
+const persistConfig = {
+  key: "root",
+  storage,
+  whitelist: ["cart"], //the only reducer that I want to persist is the cart->cartReducer
+};
+
+//actual code that combines all of our states together
+const rootReducer = combineReducers({
   user: userReducer,
   cart: cartReducer,
 });
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
+export default persistedReducer;
