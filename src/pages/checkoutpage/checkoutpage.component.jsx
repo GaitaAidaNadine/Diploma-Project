@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 
 import "./checkoutpage.styles.scss";
 import CheckoutItem from "../../components/checkout-item/checkout-item.component";
+import StripeCheckoutButton from "../../components/stripe-button/stripe-button.component";
 
 const CheckoutPage = ({ total, cartItems }) => {
   return (
@@ -24,10 +25,15 @@ const CheckoutPage = ({ total, cartItems }) => {
           <span>Remove</span>
         </div>
       </div>
-      {cartItems.map(cartItem => <CheckoutItem key={cartItem.id} cartItem={cartItem} />)}
+      {cartItems.map((cartItem) => (
+        <CheckoutItem key={cartItem.id} cartItem={cartItem} />
+      ))}
       <div className="total">
         <span>TOTAL: ${total}</span>
       </div>
+      {/*Due to the fact that we are in a test mode, we'll use the following test credit card for payments 
+      offered by Stripe API(https://stripe.com/docs/testing#cards): 4242424242424242 - Exp: 07/20 - CVC: 456*/}
+      <StripeCheckoutButton amount={total} />
     </div>
   );
 };
@@ -38,7 +44,7 @@ const mapStateToProps = (state) => ({
       accumulatedPrice + cartItem.quantity * cartItem.price,
     0
   ),
-  cartItems: state.cart.cartItems
+  cartItems: state.cart.cartItems,
 });
 
 export default connect(mapStateToProps)(CheckoutPage);

@@ -14,6 +14,7 @@ import { setCurrentUser } from "./redux/user/user-actions";
 import ProductDetails from "./components/product-details/product-details.component";
 import PilatesPage from "./pages/pilatespage/pilatespage.component";
 import CheckoutPage from "./pages/checkoutpage/checkoutpage.component";
+import ContactPage from "./pages/contactpage/contactpage.component";
 
 class App extends React.Component {
   unsubscribeFromAuth = null;
@@ -66,8 +67,19 @@ class App extends React.Component {
           <Route path="/yoga/:productId" component={ProductDetails} />
           <Route exact path="/pilates" component={PilatesPage} />
           <Route path="/pilates/:productId" component={ProductDetails} />
-          <Route exact path="/signin" render={() => this.props.currentUser ? <Redirect to='/' /> : <SignInAndSignUpPage/>} />
+          <Route
+            exact
+            path="/signin"
+            render={() =>
+              this.props.currentUser ? (
+                <Redirect to="/" />
+              ) : (
+                <SignInAndSignUpPage />
+              )
+            }
+          />
           <Route exact path="/checkout" component={CheckoutPage} />
+          <Route exact path="/contact" component={ContactPage} />
         </Switch>
       </div>
     );
