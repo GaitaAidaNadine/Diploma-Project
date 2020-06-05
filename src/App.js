@@ -1,37 +1,37 @@
 import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import HomePage from "./pages/homepage/homepage.component";
+import HomePage from "./pages/homepage/HomePage";
 import "./App.css";
-import FatLossPage from "./pages/fatlosspage/fatlosspage.component";
-import MuscleBuildingPage from "./pages/musclebuildingpage/musclebuildingpage.component";
-import CardioPage from "./pages/cardiopage/cardiopage.component";
-import YogaPage from "./pages/yogapage/yogapage.component";
-import SignInAndSignUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
-import Header from "./components/header/header.component";
-import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
-import { setCurrentUser } from "./redux/user/user-actions";
-import ProductDetails from "./components/product-details/product-details.component";
-import PilatesPage from "./pages/pilatespage/pilatespage.component";
-import CheckoutPage from "./pages/checkoutpage/checkoutpage.component";
-import ContactPage from "./pages/contactpage/contactpage.component";
+import FatLossPage from "./pages/fatlosspage/FatLossPage";
+import MuscleBuildingPage from "./pages/musclebuildingpage/MuscleBuildingPage";
+import CardioPage from "./pages/cardiopage/CardioPage";
+import YogaPage from "./pages/yogapage/YogaPage";
+import SignInPage from "./pages/signinpage/SignInPage";
+import Header from "./components/Header/Header";
+import { auth, saveUserDataToDb } from "./firebase";
+import {setUser} from "./redux/user/userActions";
+import ProductDetails from "./components/ProductDetails/ProductDetails";
+import PilatesPage from "./pages/pilatespage/PilatesPage";
+import CheckoutPage from "./pages/checkoutpage/CheckoutPage";
+import ContactPage from "./pages/contactpage/ContactPage";
 
 class App extends React.Component {
   unsubscribeFromAuth = null;
 
   componentDidMount() {
-    const { setCurrentUser } = this.props;
+    const { setUser } = this.props;
     //onAuthStateChanged-> method with open subscription(everytime the user signs-in or signs-out we receive that user's state without requesting it all the time)
     //it is async because we'll make a potential api request to our firestore
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
       //user signs-in
       if (userAuth) {
-        const userRef = await createUserProfileDocument(userAuth);
+        const userRef = await saveUserDataToDb(userAuth);
 
         //used this to STORE IN OUR STATE the USER DATA that logged-in from DB
         //onSnapshot -> listen to userRef to any changes to that data
         (await userRef).onSnapshot((snapshot) => {
-          setCurrentUser({
+          setUser({
             id: snapshot.id,
             ...snapshot.data(),
           });
@@ -39,7 +39,7 @@ class App extends React.Component {
       }
       //user signs-out
       else {
-        setCurrentUser(userAuth);
+        setUser(userAuth);
       }
     });
   }
@@ -71,10 +71,10 @@ class App extends React.Component {
             exact
             path="/signin"
             render={() =>
-              this.props.currentUser ? (
+              this.props.user ? (
                 <Redirect to="/" />
               ) : (
-                <SignInAndSignUpPage />
+                <SignInPage />
               )
             }
           />
@@ -87,11 +87,11 @@ class App extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  currentUser: state.user.currentUser,
+  user: state.user.user,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  setCurrentUser: (user) => dispatch(setCurrentUser(user)),
+  setUser: (user) => dispatch(setUser(user)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

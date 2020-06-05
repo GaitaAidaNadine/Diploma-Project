@@ -1,0 +1,38 @@
+.checkout-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 65%;
+  margin: 40px auto;
+
+  .checkout-header {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 3px solid darkgrey;
+    width: 100%;
+    padding: 20px;
+
+    .header-block {
+      text-transform: uppercase;
+      font-size: 20px;
+      font-weight: bold;
+      margin-left: 15px;
+      width: 25%;
+
+      &:last-child {
+        width: 6%;
+      }
+    }
+  }
+
+  button {
+    margin-left: auto;
+    margin-top: 30px;
+  }
+
+  .total-price {
+    font-size: 40px;
+    margin-left: auto;
+    margin-top: 35px;
+  }
+}

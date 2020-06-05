@@ -1,9 +1,8 @@
 body {
+    padding: 19px 59px;
     font-family: 'Open Sans Condensed';
-    padding: 20px 60px;
 }
-
 a {
+    color: grey;
     text-decoration: none;
-    color: grey
 }

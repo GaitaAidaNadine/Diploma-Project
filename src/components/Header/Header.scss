@@ -1,0 +1,26 @@
+.header {
+  width: 100%;
+  height: 110px;
+  display: flex;
+  justify-content: space-between;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background-color: lightgray;
+  margin-bottom: 5px;
+
+  .links {
+    height: 100%;
+    width: 70%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    margin-right: 77px;
+
+    .link {
+      font-size: x-large;
+      font-weight: 700;
+      color: black;
+      cursor: pointer;
+      padding: 10px 15px;
+    }
+  }
+}

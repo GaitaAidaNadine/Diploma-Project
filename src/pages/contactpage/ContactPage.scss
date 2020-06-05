@@ -1,0 +1,45 @@
+.contact-page-style {
+  width: 85%;
+  margin: auto auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .image {
+    height: 100%;
+    width: 42%;
+  }
+
+  .contact-page {
+    font-size: 45px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 50px auto 0;
+
+    .contact-title {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-weight: bolder;
+      margin-top: 20px;
+
+      .message {
+        font-size: 25px;
+        letter-spacing: 3px;
+        color: red;
+      }
+    }
+
+    .contact-phone,
+    .contact-email {
+      display: flex;
+      align-items: center;
+
+      .paragraph-number,
+      .paragraph-email {
+        margin-left: 25px;
+      }
+    }
+  }
+}

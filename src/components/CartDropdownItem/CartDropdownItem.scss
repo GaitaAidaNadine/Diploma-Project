@@ -1,0 +1,23 @@
+.cart-dropdown-item {
+  display: flex;
+  margin-bottom: 15px;
+  height: 80px;
+  width: 100%;
+
+  .item-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    width: 65%;
+    padding: 9px 21px;
+
+    .name {
+      font-size: 17px;
+    }
+  }
+
+  img {
+    width: 35%;
+  }
+}
